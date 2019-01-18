@@ -116,25 +116,6 @@
     } else if (self.screensAvailable == 1) {
             WebscreenViewController *wvc = [self.screens objectAtIndex:0];
             [self startScreen:wvc forSession:newSession.sid];
-    } else {
-        // Show a picker view to the user for screen selection
-        if(self.navi == nil) {
-            if (!self.devicePickerViewController) {
-                self.devicePickerViewController = [[DevicePickerViewController alloc] init];
-                self.devicePickerViewController.pickerDelegate = self;
-                self.navi = [[UINavigationController alloc] initWithRootViewController:self.devicePickerViewController];
-            }
-        }
-        // The last caller of requestSession will get the picker result
-        // TODO(mla): API spec needs clarification on this
-        self.devicePickerViewController.sid = newSession.sid;
-
-        if (!self.pickerShowing) {
-            self.pickerShowing = YES;
-            //[self.viewController.navigationController presentViewController:self.devicePickerViewController animated:YES completion:nil];
-
-            [self.viewController presentViewController:self.navi animated:YES completion:nil];
-        }
     }
 }
 
